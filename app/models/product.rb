@@ -11,4 +11,21 @@ class Product < ApplicationRecord
   
   #tiene muchos tamaños a traves de variantes 
   has_many :sizes , through: :variants
+
+  def self.available_stock
+    arreglo = []
+    products = Product.all
+    products.each do |product|
+      stock = product.variants.sum(:stock)
+      if stock > 0
+        arreglo.push product
+      end  
+    end
+    arreglo
+  end
+
+  def stock
+    self.variants.sum(:stock)
+  end
+
 end

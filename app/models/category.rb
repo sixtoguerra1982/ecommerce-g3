@@ -3,6 +3,13 @@ class Category < ApplicationRecord
 
   belongs_to :father, class_name: "Category", optional: true
 
+
+  # 
+  scope :all_parents, -> {where(father_id: nil)}
+
+  scope :all_children, -> {where.not(father_id: nil)}
+  # 
+
   def childs
     Category.where(father_id: self.id)
   end
@@ -26,5 +33,19 @@ class Category < ApplicationRecord
         end
     end
     return hash
-  end  
+  end
+
+  # [{category: nombre de la categoria , father: padre de esa categoria , childrens: hijo de la categoria}]
+  def self.offspring_two
+    array = []
+    Category.all.each do |category|
+      hash = {}
+      hash[:category] = category.name
+      hash[:father] = category.father
+      hash[:childrens] = category.childs
+      array.push hash
+    end
+    array
+  end
+
 end

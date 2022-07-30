@@ -4,7 +4,7 @@ class CreateVariants < ActiveRecord::Migration[5.2]
       t.references :size, foreign_key: true
       t.references :color, foreign_key: true
       t.references :product, foreign_key: true
-      t.string :stock, default: 0
+      t.integer :stock, default: 0
 
       t.timestamps
     end

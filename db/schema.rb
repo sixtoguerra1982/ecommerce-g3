@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_30_150157) do
+ActiveRecord::Schema.define(version: 2022_07_30_164010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 2022_07_30_150157) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "stock"
     t.decimal "price"
     t.string "sku"
     t.datetime "created_at", null: false
@@ -119,7 +118,7 @@ ActiveRecord::Schema.define(version: 2022_07_30_150157) do
     t.bigint "size_id"
     t.bigint "color_id"
     t.bigint "product_id"
-    t.string "stock", default: "0"
+    t.integer "stock", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["color_id"], name: "index_variants_on_color_id"
